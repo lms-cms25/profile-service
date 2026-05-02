@@ -1,10 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Domain.Entities;
+using Infrastructure.Persistance.Context;
+using Microsoft.EntityFrameworkCore;
+using Application.Abstractions;
 
-namespace Infrastructure.Persistance.Repositories
+namespace Infrastructure.Persistence.Repositories;
+
+public class ProfileRepository : IProfileRepository
 {
-    internal class ProfileRepository
+    private readonly AppDbContext _context;
+
+    public ProfileRepository(AppDbContext context)
     {
+        _context = context;
+    }
+
+    public async Task AddAsync(Profile profile)
+    {
+        _context.Profiles.Add(profile);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<Profile?> GetByUserIdAsync(string userId)
+    {
+        return await _context.Profiles
+            .FirstOrDefaultAsync(p => p.UserId == userId);
     }
 }
