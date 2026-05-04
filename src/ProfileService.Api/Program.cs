@@ -1,14 +1,18 @@
+using Infrastructure.Persistance.Configurations;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// services
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-// koppla DB + repository
 builder.Services.AddPersistence(builder.Configuration);
 
 var app = builder.Build();
 
-// middleware
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseHttpsRedirection();
 
 app.MapControllers();
