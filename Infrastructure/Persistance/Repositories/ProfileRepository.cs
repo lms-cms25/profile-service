@@ -3,7 +3,7 @@ using Infrastructure.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using Application.Abstractions;
 
-namespace Infrastructure.Persistence.Repositories;
+namespace Infrastructure.Persistance.Repositories;
 
 public class ProfileRepository : IProfileRepository
 {
