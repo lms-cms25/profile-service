@@ -22,8 +22,7 @@ public class ProfileController : ControllerBase
     {
         var profile = new Profile
         {
-            // In a real application, you would get the user ID from the authenticated user context
-            UserId = "test-user",
+            UserId = "test123",
             FirstName = dto.FirstName,
             LastName = dto.LastName,
             Phone = dto.Phone,
@@ -32,7 +31,7 @@ public class ProfileController : ControllerBase
 
         await _repository.AddAsync(profile);
 
-        return Ok();
+        return Ok(profile);
     }
 
     [HttpGet("{userId}")]
