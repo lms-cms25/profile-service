@@ -65,10 +65,8 @@ public class ProfileController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> Update(ProfileDto dto)
     {
-
-        Console.WriteLine("Create: " + User?.FindFirstValue(ClaimTypes.NameIdentifier));
-
-        var profile = await _repository.GetByUserIdAsync(User?.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var userId = User?.FindFirstValue(ClaimTypes.NameIdentifier);
+        var profile = await _repository.GetByUserIdAsync(userId);
 
         if (profile == null)
             return NotFound();
